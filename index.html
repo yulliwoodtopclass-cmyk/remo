@@ -15,7 +15,7 @@
                 extend: {
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
-                        display: ['Syne', 'sans-serif'], // For massive typography
+                        display: ['Syne', 'sans-serif'], 
                     },
                     colors: {
                         brand: '#ff6b00',
@@ -33,17 +33,14 @@
             overflow-x: hidden;
         }
         
-        /* Hide scrollbar but keep functionality */
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
         
-        /* Typography Outline Effect (BMS Reference) */
         .text-outline {
             -webkit-text-stroke: 2px #ff6b00;
             color: transparent;
         }
 
-        /* Glassmorphism (Toss Reference) */
         .glass-panel {
             background: rgba(255, 255, 255, 0.03);
             backdrop-filter: blur(20px);
@@ -51,14 +48,12 @@
             border: 1px solid rgba(255, 255, 255, 0.05);
         }
 
-        /* Animations */
         .fade-in-up { animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; opacity: 0; }
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(40px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Image hover reveal */
         .reveal-img {
             filter: grayscale(100%) brightness(0.7);
             transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
@@ -106,9 +101,8 @@
 
     <main class="flex-grow w-full">
         
-        <!-- SECTION: HOME (BMS & HERoines Reference) -->
+        <!-- SECTION: HOME -->
         <section id="home" class="page-section fade-in-up relative min-h-screen flex items-center justify-center overflow-hidden">
-            <!-- Background Elements -->
             <div class="absolute inset-0 z-0">
                 <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-brand/20 rounded-full blur-[120px] mix-blend-screen"></div>
                 <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-900/20 rounded-full blur-[120px] mix-blend-screen"></div>
@@ -116,13 +110,11 @@
 
             <div class="relative z-10 w-full max-w-[1400px] mx-auto px-6 flex flex-col items-center justify-center pt-20">
                 
-                <!-- Massive Typography Overlapping Image -->
                 <div class="relative w-full flex justify-center items-center my-20">
                     <h1 class="font-display text-[15vw] leading-[0.8] font-black text-brand text-center uppercase whitespace-nowrap z-0 select-none">
                         TEAM<br>REMO
                     </h1>
                     
-                    <!-- Center Overlapping Image (BMS Style) -->
                     <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[80%] md:w-[50%] z-10 cursor-pointer group" onclick="navigate('team')">
                         <div class="relative overflow-hidden rounded-sm">
                             <img src="IMG_1227_3.jpg" alt="Team" class="w-full h-auto object-cover reveal-img">
@@ -131,7 +123,6 @@
                     </div>
                 </div>
 
-                <!-- Secondary Banner Image -->
                 <div class="w-full max-w-3xl mt-12 z-20">
                     <img src="KakaoTalk_20260828_151654825_01.png" alt="REMO Banner" class="w-full object-contain opacity-80 hover:opacity-100 transition-opacity">
                 </div>
@@ -143,6 +134,7 @@
             </div>
         </section>
 
+        <!-- SECTION: PROJECTS -->
         <section id="projects" class="page-section hidden fade-in-up py-32">
             <div class="max-w-[1400px] mx-auto px-6">
                 <div class="flex flex-col md:flex-row justify-between items-end mb-20">
@@ -151,7 +143,6 @@
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
-                    <!-- Project 1 -->
                     <div class="group cursor-pointer">
                         <div class="relative w-full aspect-[4/3] overflow-hidden bg-surface mb-6">
                             <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=80" alt="Work" class="w-full h-full object-cover filter grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700">
@@ -160,7 +151,6 @@
                         <p class="text-gray-500 uppercase tracking-widest text-sm">UX/UI & Frontend</p>
                     </div>
 
-                    <!-- Project 2 (Brand) -->
                     <div class="group cursor-pointer md:mt-32">
                         <div class="relative w-full aspect-[4/3] overflow-hidden bg-brand flex items-center justify-center mb-6">
                             <img src="KakaoTalk_20260828_151654825.png" alt="Work" class="w-48 object-contain filter brightness-0 invert group-hover:rotate-12 group-hover:scale-110 transition-all duration-700">
@@ -172,12 +162,12 @@
             </div>
         </section>
 
+        <!-- SECTION: TEAM -->
         <section id="team" class="page-section hidden fade-in-up py-32 bg-surface">
             <div class="max-w-[1400px] mx-auto px-6">
                 <h2 class="font-display text-6xl md:text-[10vw] font-black uppercase text-outline mb-20 leading-none">The Creators</h2>
                 
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-x-8 gap-y-16">
-                    <!-- Member cards -->
                     <div class="border-t border-white/10 pt-6">
                         <p class="text-brand font-bold text-xs uppercase tracking-widest mb-4">Project Manager</p>
                         <h3 class="text-3xl font-bold mb-4 uppercase">Alex Kim</h3>
@@ -202,6 +192,7 @@
             </div>
         </section>
 
+        <!-- SECTION: CHAT -->
         <section id="chat" class="page-section hidden fade-in-up py-24 h-screen">
             <div class="max-w-5xl mx-auto h-full px-6 flex flex-col">
                 
@@ -212,32 +203,27 @@
                     </div>
                 </div>
 
-                <!-- Glassmorphism Chat Container -->
                 <div class="flex-grow glass-panel rounded-3xl overflow-hidden relative flex flex-col shadow-[0_0_50px_rgba(255,107,0,0.05)] border border-white/10">
                     
-                    <!-- Login Overlay for Chat -->
                     <div id="chat-auth-overlay" class="absolute inset-0 bg-dark/80 backdrop-blur-md z-20 flex flex-col items-center justify-center">
                         <div class="text-center max-w-sm">
                             <h3 class="font-display text-3xl font-black mb-4 uppercase text-white">Members Only</h3>
-                            <p class="text-gray-400 font-medium mb-8 text-sm">라운지에 입장하려면 보안 인증이 필요합니다.</p>
+                            <p class="text-gray-400 font-medium mb-8 text-sm">라운지에 입장하려면 보안 인증이 필요합니다.<br><span id="db-warning" class="text-brand hidden mt-2 block">※ 현재 외부 배포 상태이므로 DB 연결이 필요합니다.</span></p>
                             <button onclick="openAuthModal()" class="bg-brand text-white px-8 py-4 rounded-full font-bold tracking-widest uppercase hover:bg-white hover:text-black transition-all">
                                 Authenticate
                             </button>
                         </div>
                     </div>
 
-                    <!-- Chat Messages Area -->
                     <div id="chat-messages" class="flex-grow overflow-y-auto p-6 md:p-10 no-scrollbar flex flex-col gap-6 bg-gradient-to-b from-transparent to-dark/50">
-                        <!-- Dynamic Messages go here -->
                     </div>
 
-                    <!-- Chat Input Area -->
                     <div class="p-6 bg-surface/50 border-t border-white/5 backdrop-blur-lg">
                         <form id="chat-form" class="flex items-end gap-4">
                             <div class="flex-grow bg-dark/50 rounded-2xl p-2 border border-white/10 focus-within:border-brand/50 transition-colors">
-                                <textarea id="chat-input" rows="1" class="w-full bg-transparent text-white px-4 py-3 focus:outline-none resize-none font-medium placeholder-gray-600 max-h-32 no-scrollbar" placeholder="Enter message..."></textarea>
+                                <textarea id="chat-input" rows="1" disabled class="w-full bg-transparent text-white px-4 py-3 focus:outline-none resize-none font-medium placeholder-gray-600 max-h-32 no-scrollbar" placeholder="Enter message..."></textarea>
                             </div>
-                            <button type="submit" id="chat-submit-btn" class="bg-brand text-white w-14 h-14 rounded-2xl flex items-center justify-center flex-shrink-0 hover:bg-white hover:text-brand transition-all disabled:opacity-50 disabled:cursor-not-allowed">
+                            <button type="submit" id="chat-submit-btn" disabled class="bg-brand text-white w-14 h-14 rounded-2xl flex items-center justify-center flex-shrink-0 hover:bg-white hover:text-brand transition-all disabled:opacity-50 disabled:cursor-not-allowed">
                                 <i class="ph-bold ph-paper-plane-tilt text-2xl"></i>
                             </button>
                         </form>
@@ -248,6 +234,7 @@
 
     </main>
 
+    <!-- Auth Modal -->
     <div id="auth-modal" class="fixed inset-0 bg-black/80 backdrop-blur-xl z-[100] hidden items-center justify-center opacity-0 transition-opacity duration-300 px-4">
         <div class="glass-panel border border-white/10 rounded-3xl p-10 max-w-md w-full shadow-2xl transform scale-95 transition-transform duration-300 relative" id="auth-modal-content">
             <button onclick="closeAuthModal()" class="absolute top-6 right-6 text-gray-500 hover:text-white transition-colors">
@@ -278,7 +265,6 @@
         </div>
     </div>
 
-    <!-- Custom Toast -->
     <div id="toast-container" class="fixed top-24 left-1/2 transform -translate-x-1/2 z-[110] flex flex-col gap-2 pointer-events-none w-max max-w-sm"></div>
 
     <script type="module">
@@ -291,13 +277,15 @@
             getFirestore, collection, addDoc, onSnapshot, query 
         } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
+        // Vercel 등에 배포되었을 때 설정값이 비어있으면 앱이 멈추지 않도록 안전장치 추가
         const appId = typeof __app_id !== 'undefined' ? __app_id : 'team-remo-app';
         const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
-
+        
         let app, db, auth;
         let currentUser = null;
         let chatUnsubscribe = null;
         let isSignUpMode = false;
+        let isFirebaseActive = false; // DB 활성화 여부 확인 변수
 
         // Custom Toast
         window.showToast = (msg, type = 'info') => {
@@ -309,22 +297,55 @@
             toast.innerHTML = `<span>${msg}</span>`;
             container.appendChild(toast);
             
-            requestAnimationFrame(() => {
-                toast.classList.remove('translate-y-[-20px]', 'opacity-0');
-            });
-
+            requestAnimationFrame(() => toast.classList.remove('translate-y-[-20px]', 'opacity-0'));
             setTimeout(() => {
                 toast.classList.add('opacity-0', 'scale-95');
                 setTimeout(() => toast.remove(), 300);
             }, 3000);
         };
 
+        // SPA Navigation (Firebase와 무관하게 작동하도록 분리)
+        window.navigate = (sectionId) => {
+            document.querySelectorAll('.page-section').forEach(sec => sec.classList.add('hidden'));
+            const target = document.getElementById(sectionId);
+            if(target) {
+                target.classList.remove('hidden', 'fade-in-up');
+                void target.offsetWidth; 
+                target.classList.add('fade-in-up');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                if(btn.dataset.target === sectionId) {
+                    if(sectionId !== 'chat') { btn.classList.add('text-white'); btn.classList.remove('text-gray-500'); }
+                } else {
+                    if(btn.dataset.target !== 'chat') { btn.classList.remove('text-white'); btn.classList.add('text-gray-500'); }
+                }
+            });
+
+            if (sectionId === 'chat' && currentUser && isFirebaseActive) loadChatMessages();
+        };
+
+        // UI 기본 이벤트 바인딩
+        document.addEventListener('DOMContentLoaded', () => {
+            navigate('home'); // 화면부터 무조건 그리도록 설정
+            initFirebase();   // 그 다음 DB 연결 시도
+        });
+
         // Init Firebase
         const initFirebase = async () => {
+            // Vercel 환경 등에서 config가 없으면 작동 중지 방지
+            if (Object.keys(firebaseConfig).length === 0) {
+                console.warn("Firebase 설정이 없습니다. UI 전용 모드로 작동합니다.");
+                document.getElementById('db-warning').classList.remove('hidden');
+                return; 
+            }
+
             try {
                 app = initializeApp(firebaseConfig);
                 db = getFirestore(app);
                 auth = getAuth(app);
+                isFirebaseActive = true;
 
                 if (typeof __initial_auth_token !== 'undefined') {
                     await signInWithCustomToken(auth, __initial_auth_token);
@@ -342,50 +363,20 @@
                     }
                     updateNavUI();
                 });
-
             } catch (error) {
                 console.error(error);
-                showToast("System Initialization Failed", "error");
+                showToast("DB 초기화 실패", "error");
             }
         };
 
-        initFirebase();
-
-        // SPA Navigation
-        window.navigate = (sectionId) => {
-            document.querySelectorAll('.page-section').forEach(sec => sec.classList.add('hidden'));
-            
-            const target = document.getElementById(sectionId);
-            if(target) {
-                target.classList.remove('hidden', 'fade-in-up');
-                void target.offsetWidth; 
-                target.classList.add('fade-in-up');
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            }
-
-            // Update Nav Styles (Active state)
-            document.querySelectorAll('.nav-btn').forEach(btn => {
-                if(btn.dataset.target === sectionId) {
-                    if(sectionId !== 'chat') {
-                        btn.classList.add('text-white');
-                        btn.classList.remove('text-gray-500');
-                    }
-                } else {
-                    if(btn.dataset.target !== 'chat') {
-                        btn.classList.remove('text-white');
-                        btn.classList.add('text-gray-500');
-                    }
-                }
-            });
-
-            if (sectionId === 'chat' && currentUser) loadChatMessages();
-        };
-
-        // Auth Modal Handlers
-        const authModal = document.getElementById('auth-modal');
-        const authContent = document.getElementById('auth-modal-content');
-        
+        // 이하 UI 조작 함수들 (변경 없음)
         window.openAuthModal = () => {
+            if(!isFirebaseActive) {
+                showToast("현재 서버에 연결되어 있지 않습니다.", "error");
+                return;
+            }
+            const authModal = document.getElementById('auth-modal');
+            const authContent = document.getElementById('auth-modal-content');
             authModal.classList.remove('hidden');
             authModal.classList.add('flex');
             setTimeout(() => {
@@ -396,6 +387,8 @@
         };
 
         window.closeAuthModal = () => {
+            const authModal = document.getElementById('auth-modal');
+            const authContent = document.getElementById('auth-modal-content');
             authModal.classList.add('opacity-0');
             authContent.classList.add('scale-95');
             setTimeout(() => {
@@ -415,6 +408,8 @@
 
         document.getElementById('auth-form').addEventListener('submit', async (e) => {
             e.preventDefault();
+            if(!isFirebaseActive) return;
+
             const email = document.getElementById('auth-email').value.trim();
             const password = document.getElementById('auth-password').value;
             const submitBtn = document.getElementById('auth-submit-btn');
@@ -443,6 +438,7 @@
         });
 
         window.handleLogout = async () => {
+            if(!isFirebaseActive) return;
             if(chatUnsubscribe) chatUnsubscribe();
             await signOut(auth);
             if (typeof __initial_auth_token !== 'undefined') {
@@ -463,7 +459,6 @@
                 authBtn.classList.add('hidden');
                 userProfile.classList.remove('hidden');
                 userProfile.classList.add('flex');
-                
                 const displayName = currentUser.displayName || (currentUser.email ? currentUser.email.split('@')[0] : 'User');
                 userNameDisplay.textContent = displayName;
             } else {
@@ -504,8 +499,10 @@
 
         chatForm.addEventListener('submit', async (e) => {
             e.preventDefault();
+            if (!isFirebaseActive || !currentUser) return;
+
             const text = chatInput.value.trim();
-            if (!text || !currentUser) return;
+            if (!text) return;
 
             chatInput.value = '';
             chatInput.style.height = 'auto';
@@ -526,7 +523,7 @@
         });
 
         function loadChatMessages() {
-            if (!currentUser) return;
+            if (!currentUser || !isFirebaseActive) return;
             if (chatUnsubscribe) chatUnsubscribe();
 
             const chatRef = collection(db, 'artifacts', appId, 'public', 'data', 'team_chat');
@@ -567,7 +564,6 @@
                     nameHtml = `<div class="text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-1.5 ml-1">${msg.sender || 'User'}</div>`;
                 }
 
-                // Dark mode bubble styling
                 const bubbleStyle = isMe 
                     ? 'bg-brand text-white rounded-2xl rounded-tr-sm' 
                     : 'bg-surface border border-white/5 text-gray-200 rounded-2xl rounded-tl-sm';
@@ -596,10 +592,6 @@
         function escapeHtml(text) {
             return (text || '').replace(/[&<>"']/g, m => ({'&': '&amp;','<': '&lt;','>': '&gt;','"': '&quot;',"'": '&#39;'}[m]));
         }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            navigate('home');
-        });
     </script>
 </body>
 </html>
