@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="ko" class="scroll-smooth bg-[#050505]">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team REMO - Workspace</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Syne', 'sans-serif'], // For massive typography
+                    },
+                    colors: {
+                        brand: '#ff6b00',
+                        dark: '#050505',
+                        surface: '#111111',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { 
+            background-color: #050505; 
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+        
+        /* Hide scrollbar but keep functionality */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        /* Typography Outline Effect (BMS Reference) */
+        .text-outline {
+            -webkit-text-stroke: 2px #ff6b00;
+            color: transparent;
+        }
+
+        /* Glassmorphism (Toss Reference) */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* Animations */
+        .fade-in-up { animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; opacity: 0; }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Image hover reveal */
+        .reveal-img {
+            filter: grayscale(100%) brightness(0.7);
+            transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal-img:hover {
+            filter: grayscale(0%) brightness(1);
+            transform: scale(1.02);
+            z-index: 20;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-brand selection:text-white flex flex-col min-h-screen">
+
+    <nav class="fixed top-0 w-full z-50 px-6 py-6 pointer-events-none mix-blend-difference">
+        <div class="max-w-[1400px] mx-auto flex justify-between items-center pointer-events-auto">
+            
+            <!-- Logo Section -->
+            <div class="flex items-center gap-3 cursor-pointer group" onclick="navigate('home')">
+                <img src="KakaoTalk_20260828_151654825.png" alt="Logo" class="w-8 h-8 object-contain group-hover:rotate-12 transition-transform">
+                <span class="font-display font-extrabold text-xl tracking-tight text-white uppercase">REMO</span>
+            </div>
+            
+            <!-- Desktop Navigation -->
+            <div class="hidden md:flex items-center space-x-8 text-sm font-bold tracking-widest uppercase">
+                <button onclick="navigate('home')" class="nav-btn text-white hover:text-brand transition-colors" data-target="home">Home</button>
+                <button onclick="navigate('projects')" class="nav-btn text-gray-500 hover:text-white transition-colors" data-target="projects">Works</button>
+                <button onclick="navigate('team')" class="nav-btn text-gray-500 hover:text-white transition-colors" data-target="team">Team</button>
+                <button onclick="navigate('chat')" class="nav-btn text-brand flex items-center gap-2 hover:opacity-80 transition-opacity" data-target="chat">
+                    <span class="w-2 h-2 rounded-full bg-brand animate-pulse"></span> Lounge
+                </button>
+            </div>
+
+            <!-- Auth Controls -->
+            <div class="flex items-center gap-4">
+                <div id="user-profile" class="hidden items-center gap-3">
+                    <span id="user-name-display" class="text-sm font-bold text-gray-300 uppercase tracking-widest">User</span>
+                    <button id="logout-btn" onclick="handleLogout()" class="text-xs text-gray-500 hover:text-white transition-colors underline underline-offset-4">LOGOUT</button>
+                </div>
+                <button id="auth-btn" onclick="openAuthModal()" class="glass-panel text-white px-6 py-2.5 rounded-full font-bold text-sm tracking-widest uppercase hover:bg-white hover:text-black transition-all">
+                    Sign In
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="flex-grow w-full">
+        
+        <!-- SECTION: HOME (BMS & HERoines Reference) -->
+        <section id="home" class="page-section fade-in-up relative min-h-screen flex items-center justify-center overflow-hidden">
+            <!-- Background Elements -->
+            <div class="absolute inset-0 z-0">
+                <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-brand/20 rounded-full blur-[120px] mix-blend-screen"></div>
+                <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-900/20 rounded-full blur-[120px] mix-blend-screen"></div>
+            </div>
+
+            <div class="relative z-10 w-full max-w-[1400px] mx-auto px-6 flex flex-col items-center justify-center pt-20">
+                
+                <!-- Massive Typography Overlapping Image -->
+                <div class="relative w-full flex justify-center items-center my-20">
+                    <h1 class="font-display text-[15vw] leading-[0.8] font-black text-brand text-center uppercase whitespace-nowrap z-0 select-none">
+                        TEAM<br>REMO
+                    </h1>
+                    
+                    <!-- Center Overlapping Image (BMS Style) -->
+                    <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[80%] md:w-[50%] z-10 cursor-pointer group" onclick="navigate('team')">
+                        <div class="relative overflow-hidden rounded-sm">
+                            <img src="IMG_1227_3.jpg" alt="Team" class="w-full h-auto object-cover reveal-img">
+                            <div class="absolute inset-0 border border-white/10 group-hover:border-brand/50 transition-colors"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Secondary Banner Image -->
+                <div class="w-full max-w-3xl mt-12 z-20">
+                    <img src="KakaoTalk_20260828_151654825_01.png" alt="REMO Banner" class="w-full object-contain opacity-80 hover:opacity-100 transition-opacity">
+                </div>
+                
+                <p class="mt-12 text-gray-400 text-lg md:text-xl max-w-2xl text-center font-medium z-20">
+                    포트폴리오를 넘어선 크리에이티브. <br class="hidden md:block">
+                    팀 REMO는 압도적인 비주얼과 완벽한 코드로 새로운 디지털 경험을 설계합니다.
+                </p>
+            </div>
+        </section>
+
+        <section id="projects" class="page-section hidden fade-in-up py-32">
+            <div class="max-w-[1400px] mx-auto px-6">
+                <div class="flex flex-col md:flex-row justify-between items-end mb-20">
+                    <h2 class="font-display text-5xl md:text-8xl font-black uppercase text-white leading-none">Selected<br>Works</h2>
+                    <p class="text-gray-500 max-w-sm text-right mt-6 md:mt-0">우리의 고민과 혁신이 담긴 마스터피스를 확인하세요.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                    <!-- Project 1 -->
+                    <div class="group cursor-pointer">
+                        <div class="relative w-full aspect-[4/3] overflow-hidden bg-surface mb-6">
+                            <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=80" alt="Work" class="w-full h-full object-cover filter grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700">
+                        </div>
+                        <h3 class="text-3xl font-bold uppercase tracking-tight mb-2 group-hover:text-brand transition-colors">Developer Portal</h3>
+                        <p class="text-gray-500 uppercase tracking-widest text-sm">UX/UI & Frontend</p>
+                    </div>
+
+                    <!-- Project 2 (Brand) -->
+                    <div class="group cursor-pointer md:mt-32">
+                        <div class="relative w-full aspect-[4/3] overflow-hidden bg-brand flex items-center justify-center mb-6">
+                            <img src="KakaoTalk_20260828_151654825.png" alt="Work" class="w-48 object-contain filter brightness-0 invert group-hover:rotate-12 group-hover:scale-110 transition-all duration-700">
+                        </div>
+                        <h3 class="text-3xl font-bold uppercase tracking-tight mb-2 group-hover:text-brand transition-colors">Brand Identity</h3>
+                        <p class="text-gray-500 uppercase tracking-widest text-sm">Design System</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="team" class="page-section hidden fade-in-up py-32 bg-surface">
+            <div class="max-w-[1400px] mx-auto px-6">
+                <h2 class="font-display text-6xl md:text-[10vw] font-black uppercase text-outline mb-20 leading-none">The Creators</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-x-8 gap-y-16">
+                    <!-- Member cards -->
+                    <div class="border-t border-white/10 pt-6">
+                        <p class="text-brand font-bold text-xs uppercase tracking-widest mb-4">Project Manager</p>
+                        <h3 class="text-3xl font-bold mb-4 uppercase">Alex Kim</h3>
+                        <p class="text-gray-400 text-sm">프로젝트의 방향성을 잡고 팀의 시너지를 극대화합니다.</p>
+                    </div>
+                    <div class="border-t border-white/10 pt-6">
+                        <p class="text-brand font-bold text-xs uppercase tracking-widest mb-4">Lead Designer</p>
+                        <h3 class="text-3xl font-bold mb-4 uppercase">Sarah Lee</h3>
+                        <p class="text-gray-400 text-sm">사용자 경험을 최우선으로 생각하는 비주얼 아티스트.</p>
+                    </div>
+                    <div class="border-t border-white/10 pt-6">
+                        <p class="text-brand font-bold text-xs uppercase tracking-widest mb-4">Frontend Dev</p>
+                        <h3 class="text-3xl font-bold mb-4 uppercase">David Park</h3>
+                        <p class="text-gray-400 text-sm">복잡한 디자인을 완벽한 인터랙티브 코드로 구현합니다.</p>
+                    </div>
+                    <div class="border-t border-white/10 pt-6">
+                        <p class="text-brand font-bold text-xs uppercase tracking-widest mb-4">Backend Dev</p>
+                        <h3 class="text-3xl font-bold mb-4 uppercase">Emily Choi</h3>
+                        <p class="text-gray-400 text-sm">안정적이고 확장 가능한 서버 인프라를 책임집니다.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="chat" class="page-section hidden fade-in-up py-24 h-screen">
+            <div class="max-w-5xl mx-auto h-full px-6 flex flex-col">
+                
+                <div class="mb-8 flex items-end justify-between">
+                    <div>
+                        <h2 class="font-display text-4xl md:text-6xl font-black uppercase tracking-tighter text-white">REMO Lounge</h2>
+                        <p class="text-gray-500 mt-2 uppercase tracking-widest text-sm">Secure Team Comms</p>
+                    </div>
+                </div>
+
+                <!-- Glassmorphism Chat Container -->
+                <div class="flex-grow glass-panel rounded-3xl overflow-hidden relative flex flex-col shadow-[0_0_50px_rgba(255,107,0,0.05)] border border-white/10">
+                    
+                    <!-- Login Overlay for Chat -->
+                    <div id="chat-auth-overlay" class="absolute inset-0 bg-dark/80 backdrop-blur-md z-20 flex flex-col items-center justify-center">
+                        <div class="text-center max-w-sm">
+                            <h3 class="font-display text-3xl font-black mb-4 uppercase text-white">Members Only</h3>
+                            <p class="text-gray-400 font-medium mb-8 text-sm">라운지에 입장하려면 보안 인증이 필요합니다.</p>
+                            <button onclick="openAuthModal()" class="bg-brand text-white px-8 py-4 rounded-full font-bold tracking-widest uppercase hover:bg-white hover:text-black transition-all">
+                                Authenticate
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Chat Messages Area -->
+                    <div id="chat-messages" class="flex-grow overflow-y-auto p-6 md:p-10 no-scrollbar flex flex-col gap-6 bg-gradient-to-b from-transparent to-dark/50">
+                        <!-- Dynamic Messages go here -->
+                    </div>
+
+                    <!-- Chat Input Area -->
+                    <div class="p-6 bg-surface/50 border-t border-white/5 backdrop-blur-lg">
+                        <form id="chat-form" class="flex items-end gap-4">
+                            <div class="flex-grow bg-dark/50 rounded-2xl p-2 border border-white/10 focus-within:border-brand/50 transition-colors">
+                                <textarea id="chat-input" rows="1" class="w-full bg-transparent text-white px-4 py-3 focus:outline-none resize-none font-medium placeholder-gray-600 max-h-32 no-scrollbar" placeholder="Enter message..."></textarea>
+                            </div>
+                            <button type="submit" id="chat-submit-btn" class="bg-brand text-white w-14 h-14 rounded-2xl flex items-center justify-center flex-shrink-0 hover:bg-white hover:text-brand transition-all disabled:opacity-50 disabled:cursor-not-allowed">
+                                <i class="ph-bold ph-paper-plane-tilt text-2xl"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="auth-modal" class="fixed inset-0 bg-black/80 backdrop-blur-xl z-[100] hidden items-center justify-center opacity-0 transition-opacity duration-300 px-4">
+        <div class="glass-panel border border-white/10 rounded-3xl p-10 max-w-md w-full shadow-2xl transform scale-95 transition-transform duration-300 relative" id="auth-modal-content">
+            <button onclick="closeAuthModal()" class="absolute top-6 right-6 text-gray-500 hover:text-white transition-colors">
+                <i class="ph-bold ph-x text-2xl"></i>
+            </button>
+            
+            <div class="mb-10">
+                <h3 id="auth-title" class="font-display text-4xl font-black text-white uppercase tracking-tighter">Sign In</h3>
+                <p id="auth-subtitle" class="text-brand font-bold uppercase tracking-widest text-xs mt-2">Team Authentication</p>
+            </div>
+            
+            <form id="auth-form" class="space-y-6">
+                <div>
+                    <input type="email" id="auth-email" required class="w-full bg-transparent border-b border-white/20 px-0 py-4 text-white font-medium focus:outline-none focus:border-brand transition-colors placeholder-gray-600" placeholder="Email Address">
+                </div>
+                <div>
+                    <input type="password" id="auth-password" required minlength="6" class="w-full bg-transparent border-b border-white/20 px-0 py-4 text-white font-medium focus:outline-none focus:border-brand transition-colors placeholder-gray-600" placeholder="Password">
+                </div>
+                
+                <button type="submit" id="auth-submit-btn" class="w-full bg-white text-black font-bold tracking-widest uppercase py-4 rounded-full hover:bg-brand hover:text-white transition-all mt-4">
+                    <span>Confirm</span>
+                </button>
+            </form>
+
+            <div class="mt-8 text-left">
+                <button onclick="toggleAuthMode()" id="auth-toggle-btn" class="text-gray-500 text-sm hover:text-white transition-colors underline underline-offset-4">Create an account instead</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Custom Toast -->
+    <div id="toast-container" class="fixed top-24 left-1/2 transform -translate-x-1/2 z-[110] flex flex-col gap-2 pointer-events-none w-max max-w-sm"></div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { 
+            getAuth, signInWithCustomToken, signInAnonymously, onAuthStateChanged,
+            createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, signOut
+        } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { 
+            getFirestore, collection, addDoc, onSnapshot, query 
+        } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'team-remo-app';
+        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
+
+        let app, db, auth;
+        let currentUser = null;
+        let chatUnsubscribe = null;
+        let isSignUpMode = false;
+
+        // Custom Toast
+        window.showToast = (msg, type = 'info') => {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            const bgClass = type === 'error' ? 'bg-red-500 text-white' : (type === 'success' ? 'bg-brand text-white' : 'bg-white text-black');
+            
+            toast.className = `${bgClass} px-6 py-3 rounded-full shadow-2xl font-bold tracking-widest uppercase text-xs flex items-center transform transition-all duration-300 translate-y-[-20px] opacity-0`;
+            toast.innerHTML = `<span>${msg}</span>`;
+            container.appendChild(toast);
+            
+            requestAnimationFrame(() => {
+                toast.classList.remove('translate-y-[-20px]', 'opacity-0');
+            });
+
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'scale-95');
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        };
+
+        // Init Firebase
+        const initFirebase = async () => {
+            try {
+                app = initializeApp(firebaseConfig);
+                db = getFirestore(app);
+                auth = getAuth(app);
+
+                if (typeof __initial_auth_token !== 'undefined') {
+                    await signInWithCustomToken(auth, __initial_auth_token);
+                } else {
+                    await signInAnonymously(auth);
+                }
+
+                onAuthStateChanged(auth, (user) => {
+                    if (user && !user.isAnonymous) {
+                        currentUser = user;
+                        unlockChatUI();
+                    } else {
+                        currentUser = null;
+                        lockChatUI();
+                    }
+                    updateNavUI();
+                });
+
+            } catch (error) {
+                console.error(error);
+                showToast("System Initialization Failed", "error");
+            }
+        };
+
+        initFirebase();
+
+        // SPA Navigation
+        window.navigate = (sectionId) => {
+            document.querySelectorAll('.page-section').forEach(sec => sec.classList.add('hidden'));
+            
+            const target = document.getElementById(sectionId);
+            if(target) {
+                target.classList.remove('hidden', 'fade-in-up');
+                void target.offsetWidth; 
+                target.classList.add('fade-in-up');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+
+            // Update Nav Styles (Active state)
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                if(btn.dataset.target === sectionId) {
+                    if(sectionId !== 'chat') {
+                        btn.classList.add('text-white');
+                        btn.classList.remove('text-gray-500');
+                    }
+                } else {
+                    if(btn.dataset.target !== 'chat') {
+                        btn.classList.remove('text-white');
+                        btn.classList.add('text-gray-500');
+                    }
+                }
+            });
+
+            if (sectionId === 'chat' && currentUser) loadChatMessages();
+        };
+
+        // Auth Modal Handlers
+        const authModal = document.getElementById('auth-modal');
+        const authContent = document.getElementById('auth-modal-content');
+        
+        window.openAuthModal = () => {
+            authModal.classList.remove('hidden');
+            authModal.classList.add('flex');
+            setTimeout(() => {
+                authModal.classList.remove('opacity-0');
+                authContent.classList.remove('scale-95');
+                document.getElementById('auth-email').focus();
+            }, 10);
+        };
+
+        window.closeAuthModal = () => {
+            authModal.classList.add('opacity-0');
+            authContent.classList.add('scale-95');
+            setTimeout(() => {
+                authModal.classList.add('hidden');
+                authModal.classList.remove('flex');
+                document.getElementById('auth-form').reset();
+            }, 300);
+        };
+
+        window.toggleAuthMode = () => {
+            isSignUpMode = !isSignUpMode;
+            document.getElementById('auth-title').innerText = isSignUpMode ? 'Register' : 'Sign In';
+            document.getElementById('auth-subtitle').innerText = isSignUpMode ? 'Join the workspace' : 'Team Authentication';
+            document.getElementById('auth-submit-btn').innerHTML = isSignUpMode ? '<span>Create Account</span>' : '<span>Confirm</span>';
+            document.getElementById('auth-toggle-btn').innerText = isSignUpMode ? 'Already have an account? Sign in' : 'Create an account instead';
+        };
+
+        document.getElementById('auth-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('auth-email').value.trim();
+            const password = document.getElementById('auth-password').value;
+            const submitBtn = document.getElementById('auth-submit-btn');
+
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = 'PROCESSING...';
+
+            try {
+                if (isSignUpMode) {
+                    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                    const nickname = email.split('@')[0];
+                    await updateProfile(userCredential.user, { displayName: nickname });
+                    showToast('Registration Complete', 'success');
+                } else {
+                    await signInWithEmailAndPassword(auth, email, password);
+                    showToast('Access Granted', 'success');
+                }
+                closeAuthModal();
+                if (!document.getElementById('chat').classList.contains('hidden')) loadChatMessages();
+            } catch (error) {
+                showToast("Authentication Failed", "error");
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = isSignUpMode ? '<span>Create Account</span>' : '<span>Confirm</span>';
+            }
+        });
+
+        window.handleLogout = async () => {
+            if(chatUnsubscribe) chatUnsubscribe();
+            await signOut(auth);
+            if (typeof __initial_auth_token !== 'undefined') {
+                await signInWithCustomToken(auth, __initial_auth_token);
+            } else {
+                await signInAnonymously(auth);
+            }
+            showToast('Logged Out');
+            navigate('home');
+        };
+
+        function updateNavUI() {
+            const authBtn = document.getElementById('auth-btn');
+            const userProfile = document.getElementById('user-profile');
+            const userNameDisplay = document.getElementById('user-name-display');
+
+            if (currentUser) {
+                authBtn.classList.add('hidden');
+                userProfile.classList.remove('hidden');
+                userProfile.classList.add('flex');
+                
+                const displayName = currentUser.displayName || (currentUser.email ? currentUser.email.split('@')[0] : 'User');
+                userNameDisplay.textContent = displayName;
+            } else {
+                authBtn.classList.remove('hidden');
+                userProfile.classList.add('hidden');
+                userProfile.classList.remove('flex');
+            }
+        }
+
+        function unlockChatUI() {
+            document.getElementById('chat-auth-overlay').classList.add('hidden');
+            document.getElementById('chat-input').disabled = false;
+            document.getElementById('chat-submit-btn').disabled = false;
+        }
+
+        function lockChatUI() {
+            document.getElementById('chat-auth-overlay').classList.remove('hidden');
+            document.getElementById('chat-input').disabled = true;
+            document.getElementById('chat-submit-btn').disabled = true;
+            document.getElementById('chat-messages').innerHTML = '';
+        }
+
+        // Chat Form
+        const chatInput = document.getElementById('chat-input');
+        const chatForm = document.getElementById('chat-form');
+        
+        chatInput.addEventListener('input', function() {
+            this.style.height = 'auto';
+            this.style.height = (this.scrollHeight < 120 ? this.scrollHeight : 120) + 'px';
+        });
+
+        chatInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                if(this.value.trim()) chatForm.dispatchEvent(new Event('submit'));
+            }
+        });
+
+        chatForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const text = chatInput.value.trim();
+            if (!text || !currentUser) return;
+
+            chatInput.value = '';
+            chatInput.style.height = 'auto';
+
+            try {
+                const chatRef = collection(db, 'artifacts', appId, 'public', 'data', 'team_chat');
+                const displayName = currentUser.displayName || (currentUser.email ? currentUser.email.split('@')[0] : 'User');
+                
+                await addDoc(chatRef, {
+                    text: text,
+                    sender: displayName,
+                    uid: currentUser.uid,
+                    timestamp: new Date().toISOString()
+                });
+            } catch (error) {
+                showToast("Message failed to send", "error");
+            }
+        });
+
+        function loadChatMessages() {
+            if (!currentUser) return;
+            if (chatUnsubscribe) chatUnsubscribe();
+
+            const chatRef = collection(db, 'artifacts', appId, 'public', 'data', 'team_chat');
+            const q = query(chatRef);
+            const msgContainer = document.getElementById('chat-messages');
+            
+            msgContainer.innerHTML = '<div class="text-brand text-xs uppercase tracking-widest text-center my-10 animate-pulse">Syncing Secure Channel...</div>';
+
+            chatUnsubscribe = onSnapshot(q, (snapshot) => {
+                const messages = [];
+                snapshot.forEach(doc => messages.push({ id: doc.id, ...doc.data() }));
+                messages.sort((a, b) => new Date(a.timestamp || 0) - new Date(b.timestamp || 0));
+                renderMessages(messages);
+            });
+        }
+
+        function renderMessages(messages) {
+            const msgContainer = document.getElementById('chat-messages');
+            msgContainer.innerHTML = '';
+            
+            if (messages.length === 0) {
+                msgContainer.innerHTML = '<div class="text-center text-gray-600 text-sm mt-10 uppercase tracking-widest">End of History</div>';
+                return;
+            }
+
+            let prevUid = null;
+
+            messages.forEach(msg => {
+                const isMe = msg.uid === currentUser.uid;
+                const showHeader = prevUid !== msg.uid;
+                const time = msg.timestamp ? new Date(msg.timestamp).toLocaleTimeString('en-US', {hour: '2-digit', minute:'2-digit'}) : '';
+
+                const wrapper = document.createElement('div');
+                wrapper.className = `flex w-full ${isMe ? 'justify-end' : 'justify-start'} ${showHeader ? 'mt-6' : 'mt-1'}`;
+                
+                let nameHtml = '';
+                if (!isMe && showHeader) {
+                    nameHtml = `<div class="text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-1.5 ml-1">${msg.sender || 'User'}</div>`;
+                }
+
+                // Dark mode bubble styling
+                const bubbleStyle = isMe 
+                    ? 'bg-brand text-white rounded-2xl rounded-tr-sm' 
+                    : 'bg-surface border border-white/5 text-gray-200 rounded-2xl rounded-tl-sm';
+
+                const timeHtml = `<span class="text-[10px] text-gray-600 uppercase tracking-widest self-end mx-2 mb-1">${time}</span>`;
+
+                wrapper.innerHTML = `
+                    <div class="flex flex-col max-w-[85%] sm:max-w-[70%]">
+                        ${nameHtml}
+                        <div class="flex ${isMe ? 'flex-row-reverse' : 'flex-row'} items-end">
+                            <div class="px-5 py-3 ${bubbleStyle}">
+                                <p class="text-[15px] whitespace-pre-wrap break-words leading-relaxed">${escapeHtml(msg.text)}</p>
+                            </div>
+                            ${showHeader ? timeHtml : '<span class="mx-2 w-8"></span>'}
+                        </div>
+                    </div>
+                `;
+
+                msgContainer.appendChild(wrapper);
+                prevUid = msg.uid;
+            });
+
+            msgContainer.scrollTop = msgContainer.scrollHeight;
+        }
+
+        function escapeHtml(text) {
+            return (text || '').replace(/[&<>"']/g, m => ({'&': '&amp;','<': '&lt;','>': '&gt;','"': '&quot;',"'": '&#39;'}[m]));
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            navigate('home');
+        });
+    </script>
+</body>
+</html>
